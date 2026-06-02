@@ -1,3 +1,4 @@
+cat > task_manager/task_utils.py << 'EOF'
 from task_manager.validation import validate_task_title, validate_task_description, validate_due_date
 
 def add_task(tasks, title, description, due_date):
@@ -18,14 +19,18 @@ def add_task(tasks, title, description, due_date):
     print("Task added successfully!")
     return tasks
 
-def mark_task_as_complete(tasks, title):
-    for task in tasks:
-        if task["title"].lower() == title.strip().lower():
-            task["completed"] = True
-            print(f"Task '{task['title']}' marked as complete.")
-            return tasks
-    print(f"Error: Task '{title}' not found.")
-    return None
+def mark_task_as_complete(tasks, task_index):
+    try:
+        index = int(task_index) - 1
+        if index < 0 or index >= len(tasks):
+            print("Error: Task not found.")
+            return None
+        tasks[index]["completed"] = True
+        print("Task marked as complete!")
+        return tasks
+    except (ValueError, IndexError):
+        print("Error: Invalid task number.")
+        return None
 
 def view_pending_tasks(tasks):
     pending = [task for task in tasks if not task["completed"]]
@@ -43,13 +48,8 @@ def view_pending_tasks(tasks):
 def calculate_progress(tasks):
     total = len(tasks)
     if total == 0:
-        print("No tasks available.")
         return 0
     completed = sum(1 for task in tasks if task["completed"])
     percentage = (completed / total) * 100
-    print(f"\n--- Progress ---")
-    print(f"Total Tasks : {total}")
-    print(f"Completed   : {completed}")
-    print(f"Pending     : {total - completed}")
-    print(f"Progress    : {percentage:.1f}%")
     return percentage
+EOF

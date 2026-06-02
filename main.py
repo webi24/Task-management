@@ -1,3 +1,4 @@
+cat > main.py << 'EOF'
 from task_manager.task_utils import add_task, mark_task_as_complete, view_pending_tasks, calculate_progress
 
 tasks = []
@@ -22,14 +23,14 @@ def main():
             add_task(tasks, title, description, due_date)
 
         elif choice == "2":
-            title = input("Enter the title of the task to mark as complete: ").strip()
-            mark_task_as_complete(tasks, title)
+            task_index = input("Enter task number to mark as complete: ").strip()
+            mark_task_as_complete(tasks, task_index)
 
         elif choice == "3":
             view_pending_tasks(tasks)
 
         elif choice == "4":
-            calculate_progress(tasks)
+            print(calculate_progress(tasks))
 
         elif choice == "5":
             print("Goodbye!")
@@ -40,3 +41,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+EOF
