@@ -1,4 +1,3 @@
-cat > task_manager/task_utils.py << 'EOF'
 from task_manager.validation import validate_task_title, validate_task_description, validate_due_date
 
 def add_task(tasks, title, description, due_date):
@@ -52,4 +51,3 @@ def calculate_progress(tasks):
     completed = sum(1 for task in tasks if task["completed"])
     percentage = (completed / total) * 100
     return percentage
-EOF

@@ -1,4 +1,3 @@
-cat > main.py << 'EOF'
 from task_manager.task_utils import add_task, mark_task_as_complete, view_pending_tasks, calculate_progress
 
 tasks = []
@@ -41,4 +40,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-EOF
